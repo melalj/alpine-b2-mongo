@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/bash
 set -e
 
-required_vars="B2_ACCOUNT_ID B2_ACCESS_KEY BACKUP_DB_NAME BACKUP_MONGODB_URI BACKUP_AUTH_DB_NAME BACKUP_ARCHIVE_NAME"
+required_vars="B2_ACCOUNT_ID B2_ACCESS_KEY B2_BUCKET BACKUP_DB_NAME BACKUP_MONGODB_URI BACKUP_AUTH_DB_NAME BACKUP_ARCHIVE_NAME"
 
 for var in $required_vars; do
 	if [ -z "$(eval echo \$$var)" ]; then
@@ -28,4 +28,9 @@ echo "Cleaning up compressed archive..."
 rm "$BACKUP_ARCHIVE_NAME"
 
 echo "Backup complete!"
+
+if [ -n "$THIN_ARCHIVE_NAME" ]; then
+	/bin/bash /thin.sh
+fi
+
 exit 0

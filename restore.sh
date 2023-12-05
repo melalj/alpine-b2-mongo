@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/bash
 set -e
 
-required_vars="B2_ACCOUNT_ID B2_ACCESS_KEY RESTORE_DB_NAME RESTORE_MONGODB_URI RESTORE_AUTH_DB_NAME RESTORE_ARCHIVE_NAME"
+required_vars="B2_ACCOUNT_ID B2_ACCESS_KEY B2_BUCKET RESTORE_DB_NAME RESTORE_MONGODB_URI RESTORE_AUTH_DB_NAME RESTORE_ARCHIVE_NAME"
 
 for var in $required_vars; do
 	if [ -z "$(eval echo \$$var)" ]; then
